@@ -32,7 +32,7 @@ const DEFAULT_SETTINGS = {
     daemon_port: config.daemonDefaultRpcPort,
     pubnodes_date: null,
     pubnodes_data: config.remoteNodeListFallback,
-    pubnodes_custom: ['127.0.0.1:11898'],
+    pubnodes_custom: ['127.0.0.1:11975'],
     tray_minimize: false,
     tray_close: false,
     darkmode: true
@@ -76,7 +76,7 @@ function createWindow () {
     win = splash.initSplashScreen({
         windowOpts: winOpts,
         templateUrl: path.join(__dirname, "src/html/splash.html"),
-        delay: 0, 
+        delay: 0,
         minVisible: 3000,
         splashScreenOpts: {
             width: 425,
@@ -114,7 +114,7 @@ function createWindow () {
                 win.minimize();
             }
         }
-        
+
     });
 
     win.on('show', () => {
@@ -197,7 +197,7 @@ function createWindow () {
             });
         }
     });
-    
+
     win.on('closed', () => {
         win = null;
     });
@@ -205,7 +205,7 @@ function createWindow () {
     win.setMenu(null);
 
     // misc handler
-    win.webContents.on('crashed', () => { 
+    win.webContents.on('crashed', () => {
         // todo: prompt to restart
         log.debug('webcontent was crashed');
     });
@@ -320,7 +320,7 @@ app.on('ready', () => {
             storeNodeList(false); // from local cache
         }
     }
-    
+
     createWindow();
 
     // target center pos of primary display
@@ -330,7 +330,7 @@ app.on('ready', () => {
     let ty = Math.ceil((primaryDisp.workAreaSize.height - (DEFAULT_SIZE.height))/2);
     if(tx > 0 && ty > 0) win.setPosition(tx, ty);
 
-    
+
 });
 
 // Quit when all windows are closed.
