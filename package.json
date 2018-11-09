@@ -2,7 +2,7 @@
   "name": "cypruselectron",
   "productName": "CyprusElectron",
   "description": "CyprusCoin GUI Wallet",
-  "version": "v0.1.0",
+  "version": "v0.1.1",
   "homepage": "https://github.com/CyprusCoinClub/cyprus-wallet-electron",
   "repository": "https://github.com/CyprusCoinClub/cyprus-wallet-electron",
   "main": "main.js",
