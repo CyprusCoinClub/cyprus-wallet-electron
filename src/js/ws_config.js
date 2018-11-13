@@ -33,7 +33,7 @@ config.remoteNodeListUpdateUrl = null;
 
 // fallback remote node list, in case fetching update failed, fill this with known to works remote nodes
 config.remoteNodeListFallback = [
-    'public.nodes.mycypruscoin.com',
+    'public.nodes.mycypruscoin.com:11975',
     '45.63.116.110:11975',
     '127.0.0.1:11975',
 ];
