@@ -252,11 +252,11 @@ function showToast(msg, duration, force){
     if(datoaste && force) {
         datoaste.parentNode.removeChild(datoaste);
     }
-    
+
     //if(datoaste) return;
 
     let toastOpts = {
-        style: { main: { 
+        style: { main: {
             'padding': '4px 6px','left': '3px','right':'auto','border-radius': '0px'
         }},
         settings: {duration: duration}
@@ -299,7 +299,7 @@ let keybindingTpl = `<div class="transaction-panel">
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>Home</kbd></th>
     <td>Switch to <strong>overview/welcome</strong> screen</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>Tab</kbd></th>
     <td>Switch to <strong>next screen</strong></td>
@@ -318,23 +318,23 @@ let keybindingTpl = `<div class="transaction-panel">
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>i</kbd></th>
     <td>Switch to <strong>Import wallet from mnemonic seed</strong> screen</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>e</kbd></th>
     <td>Switch to <strong>Export private keys/seed</strong> screen (when wallet opened)</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>t</kbd></th>
     <td>Switch to <strong>Transactions</strong> screen (when wallet opened)</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>s</kbd></th>
     <td>Switch to <strong>Send/Transfer</strong> screen (when wallet opened)</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>x</kbd></th>
     <td>Close wallet</td>
-</tr> 
+</tr>
 <tr>
     <th scope="col"><kbd>Ctrl</kbd>+<kbd>\\</kbd></th>
     <td>Toggle dark/night mode</td>
@@ -346,7 +346,7 @@ let keybindingTpl = `<div class="transaction-panel">
 <tr>
     <th scope="col"><kbd>Esc</kbd></th>
     <td>Close any opened dialog (like this dialog)</td>
-</tr> 
+</tr>
 </tbody>
 </table>
 <div class="div-panel-buttons">
@@ -357,10 +357,10 @@ let keybindingTpl = `<div class="transaction-panel">
 
 function genPaymentId(ret){
     ret = ret || false;
-    
+
     let payId = require('crypto').randomBytes(32).toString('hex');
     if(ret) return payId;
-    
+
     let dialogTpl = `<div class="transaction-panel">
     <h4>Generated Payment ID:</h4>
     <textarea data-cplabel="Payment ID" title="click to copy" class="ctcl default-textarea" rows="1" readonly="readonly">${payId}</textarea>
@@ -439,7 +439,7 @@ function changeSection(sectionId, isSettingRedir) {
         showToast('Opening wallet in progress, please wait...');
         return;
     }
-    
+
     formMessageReset();
     isSettingRedir = isSettingRedir === true ? true : false;
     let targetSection = sectionId.trim();
@@ -461,7 +461,7 @@ function changeSection(sectionId, isSettingRedir) {
 
     let finalTarget = targetSection;
     let toastMsg = '';
-    
+
     if(needServiceReady.indexOf(targetSection) >=0 && !isServiceReady){
         // no access to wallet, send, tx when no wallet opened
         finalTarget = 'section-welcome';
@@ -476,7 +476,7 @@ function changeSection(sectionId, isSettingRedir) {
         if(targetSection === 'section-overview-load'){
             initNodeCompletion();
         }
-        // if(targetSection === 'section-settings'){           
+        // if(targetSection === 'section-settings'){
         //     let defaultText = 'Type first few character(s) and select from public node list, or type to your own node address';
         //     if(isServiceReady){
         //         settingsInputDaemonAddress.setAttribute('disabled','disabled');
@@ -507,7 +507,7 @@ function changeSection(sectionId, isSettingRedir) {
     let newActiveNavbarButton = document.querySelector(`.navbar button[data-section="${finalButtonTarget}"]`);
     if(newActiveNavbarButton){
         const activeButton = document.querySelector(`.btn-active`);
-        if(activeButton) activeButton.classList.remove('btn-active');    
+        if(activeButton) activeButton.classList.remove('btn-active');
         if(newActiveNavbarButton) newActiveNavbarButton.classList.add('btn-active');
     }
 
@@ -626,7 +626,7 @@ function initAddressCompletion(){
             var wpayid = spl[2];
             return `<div class="autocomplete-suggestion" data-paymentid="${wpayid}" data-val="${waddr}">${wname.replace(re, "<b>$1</b>")}<br><span class="autocomplete-wallet-addr">${waddr.replace(re, "<b>$1</b>")}<br>Payment ID: ${(wpayid ? wpayid.replace(re, "<b>$1</b>") : 'N/A')}</span></div>`;
         },
-        onSelect: function(e, term, item){               
+        onSelect: function(e, term, item){
             document.getElementById('input-send-payid').value = item.getAttribute('data-paymentid');
         }
     });
@@ -646,10 +646,10 @@ function formMessageSet(target, status, txt){
     formMessageReset();
     let the_target = `${target}-${status}`;
     let the_el = null;
-    try{ 
+    try{
         the_el = document.querySelector('.form-ew[id$="'+the_target+'"]');
     }catch(e){}
-    
+
     if(the_el){
         the_el.classList.remove('hidden');
         wsutil.innerHTML(the_el, txt);
@@ -726,7 +726,7 @@ function handleSettings(){
             formMessageSet('settings','error',`Unable to find ${config.walletServiceBinaryFilename}, please enter the correct path`);
             return false;
         }
-                
+
         let vals = {
             service_bin: serviceBinValue,
             daemon_host: settings.get('daemon_host'),
@@ -750,9 +750,9 @@ function handleAddressBook(){
         let currentLength = document.querySelectorAll('.addressbook-item:not([data-hash="fake-hash"])').length;
         let abookLength =abook.size;
         let perPage = 9;
-    
+
         if(currentLength >= abookLength  && !force)  return;
-    
+
         let listOpts = {
             valueNames: [
                 {data: ['hash', 'nameval','walletval','paymentidval','qrcodeval']},
@@ -760,12 +760,12 @@ function handleAddressBook(){
             ],
             indexAsync: true
         };
-    
+
         if(abookLength > perPage){
             listOpts.page = perPage;
             listOpts.pagination = true;
         }
-    
+
         const addressList = new List('addressbooks', listOpts);
         addressList.clear();
         Object.keys(abook.get()).forEach((key) => {
@@ -781,7 +781,7 @@ function handleAddressBook(){
                 qrcodeval: et.qrCode || ''
             });
         });
-    
+
         addressList.remove('hash', 'fake-hash');
     }
 
@@ -813,7 +813,7 @@ function handleAddressBook(){
                      <button data-addressid="${this.dataset.hash}" type="button" class="form-bt button-gray" id="button-addressbook-panel-close">Close</button>
              </div>
         `;
-     
+
         wsutil.innerHTML(dialog, tpl);
         // get new dialog
         dialog = document.getElementById('ab-dialog');
@@ -823,7 +823,7 @@ function handleAddressBook(){
              abdialog.close();
              wsutil.clearChild(abdialog);
          });
-     
+
          let deleteBtn = document.getElementById('button-addressbook-panel-delete');
          deleteBtn.addEventListener('click', () => {
              let tardel = this.dataset.nameval;
@@ -841,7 +841,7 @@ function handleAddressBook(){
                  }
              }
          });
-     
+
          let editBtn = document.getElementById('button-addressbook-panel-edit');
          editBtn.addEventListener('click', ()=>{
              let origHash = this.dataset.hash;
@@ -901,7 +901,7 @@ function handleAddressBook(){
             formMessageSet('addressbook','error',`Invalid ${config.assetName} address`);
             return;
         }
-        
+
         if( paymentIdValue.length){
             if( !wsutil.validatePaymentId(paymentIdValue) ){
                 formMessageSet('addressbook','error',"Invalid Payment ID");
@@ -920,7 +920,7 @@ function handleAddressBook(){
             formMessageSet('addressbook','error',"This combination of address and payment ID already exist, please enter new address or different payment id.");
             return;
         }
-   
+
         try{
             abook.set(entryHash, {
                 name: entryName,
@@ -930,7 +930,7 @@ function handleAddressBook(){
             });
             let oldHash = addressBookInputName.dataset.oldhash || '';
             let isNew = (oldHash.length && oldHash !== entryHash);
-            
+
             if(isUpdate && isNew){
                 abook.delete(oldHash);
             }
@@ -1182,7 +1182,7 @@ function handleWalletImportKeys(){
         let viewKeyValue = importKeyInputViewKey.value ? importKeyInputViewKey.value.trim() : '';
         let spendKeyValue = importKeyInputSpendKey.value ? importKeyInputSpendKey.value.trim() : '';
         let scanHeightValue = importKeyInputScanHeight.value ? parseInt(importKeyInputScanHeight.value,10) : 1;
-        
+
         // validate path
         wsutil.validateWalletPath(filePathValue, DEFAULT_WALLET_PATH).then((finalPath)=>{
             if(!passwordValue.length){
@@ -1200,7 +1200,7 @@ function handleWalletImportKeys(){
                 formMessageSet('import','error', 'View Key and Spend Key can not be left blank!');
                 return;
             }
-    
+
             if(!wsutil.validateSecretKey(viewKeyValue)){
                 formMessageSet('import','error', 'Invalid view key!');
                 return;
@@ -1359,7 +1359,7 @@ function handleSendTransfer(){
         if(maxsend) sendInputAmount.value = maxsend;
     });
 
-    sendInputFee.value = 0.1;
+    sendInputFee.value = 0.001;
     function setPaymentIdState(addr){
         if(addr.length > 99){
             sendInputPaymentId.value = '';
@@ -1421,7 +1421,7 @@ function handleSendTransfer(){
             formMessageSet('send','error',`Amount can't have more than ${config.decimalPlaces} decimal places`);
             return;
         }
-        
+
         total += amount;
         let txAmount = wsutil.amountForImmortal(amount); // final transfer amount
 
@@ -1449,7 +1449,7 @@ function handleSendTransfer(){
         if(parseFloat(txTotal) > parseFloat(availableBalance)){
             formMessageSet(
                 'send',
-                'error', 
+                'error',
                 `Sorry, you don't have enough funds to process this transfer. Transfer amount+fees: ${(txTotal)}`
             );
             return;
@@ -1649,7 +1649,7 @@ function handleTransactions(){
                 txListOpts.pagination = [{
                     innerWindow: 2,
                     outerWindow: 1
-                }]; 
+                }];
             }
             TXLIST_OBJ = new List('transaction-lists', txListOpts, txs);
             TXLIST_OBJ.sort('timestamp', {order: 'desc'});
@@ -1843,7 +1843,7 @@ function initHandlers(){
     initSectionTemplates();
     let darkStart = settings.get('darkmode', false);
     setDarkMode(darkStart);
-    
+
     // netstatus
     handleNetworkChange();
 
@@ -1914,7 +1914,7 @@ function initHandlers(){
     });
 
     overviewIntegratedAddressGen.addEventListener('click', showIntegratedAddressForm);
-    
+
     wsutil.liveEvent('#doGenIntegratedAddr', 'click', () => {
         formMessageReset();
         let genInputAddress = document.getElementById('genInputAddress');
@@ -1964,7 +1964,7 @@ function initHandlers(){
         if(dialogType === 'saveFile') {
             dialogOpts.title = `Select directory to store your ${targetName}, and give it a filename.`;
             dialogOpts.buttonLabel = 'OK';
-            
+
             remote.dialog.showSaveDialog(dialogOpts, (file) => {
                 if (file) targetInput.value = file;
             });
@@ -2052,7 +2052,7 @@ function initHandlers(){
     });
 
     kswitch.addEventListener('click', showKeyBindings);
-    
+
     //handleNetworkChange();
 
     // settings handlers
